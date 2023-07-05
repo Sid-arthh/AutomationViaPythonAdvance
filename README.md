@@ -13,8 +13,10 @@ To get started with the script, follow these steps:
 
 Clone this repository to your local machine.
 Install the necessary dependencies by running pip install -r requirements
+
   REQUIREMENTS
   python3+
+  
 Configure the script by modifying the settings file config.py to match your environment.
 Run the script using the command python main.py.
 Sit back and let the script handle the scaling of CFM resources!
