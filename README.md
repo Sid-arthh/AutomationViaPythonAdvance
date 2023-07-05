@@ -13,7 +13,6 @@ To get started with the script, follow these steps:
 
 Clone this repository to your local machine.
 Install the necessary dependencies by running pip install -r requirements
-
   REQUIREMENTS
   python3+
   
