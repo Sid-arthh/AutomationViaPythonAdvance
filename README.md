@@ -1,6 +1,6 @@
 # Scaling cloudformation resources dynamically
 
-About
+###About
 
 Welcome to the repository! This project features a Python wrapper script designed to simplify the process of scaling CFM (Cloud Resource Management) resources. By running this script, you can effortlessly manage and deploy resources based on your requirements.
 Functionality
