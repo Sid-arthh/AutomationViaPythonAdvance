@@ -5,8 +5,7 @@
 Welcome to the repository! This project features a Python wrapper script designed to simplify the process of scaling CFM (Cloud Resource Management) resources. By running this script, you can effortlessly manage and deploy resources based on your requirements.
 Functionality
 
-The script provides the following functionalities:
-
+#### The script provides the following functionalities:
 Resource Scaling: It automatically checks if the resource enable flag is set to True. If enabled, the script dynamically creates and adds the specified resource during deployment.
 
 Getting Started
