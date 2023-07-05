@@ -65,12 +65,27 @@ In this section, we will provide a detailed explanation of the updated code for 
 
 #### Dependencies and imports
 
-The above lines import the necessary modules for the script, including sys, yaml, os, and importlib
+The below lines import the necessary modules for the script, including sys, yaml, os, and importlib
   
-  import sys
-  import yaml
-  import os
-  import importlib
+    import sys
+    import yaml
+    import os
+    import importlib
+
+#### Variables and Console input 
+
+Here, we define some initial variables. directory represents the path to the "resources" directory. combined_data and combined_data_dict will be used to store the combined data from various resources. resource_names will store the names of the resources. outstream_file indicates the path to the output file. The script checks if a YAML file path is provided as a command-line argument and assigns it to Client_yml_file.
+
+    directory = "./resources"
+    combined_data = {}
+    combined_data_dict = {}
+    resource_names = []
+    outstream_file = "resources/outstream.yml"
+    
+    if len(sys.argv) < 2:
+        print("Please provide a YAML file path as a command line argument.")
+        sys.exit(1)
+    Client_yml_file = sys.argv[1]
 
 
 
