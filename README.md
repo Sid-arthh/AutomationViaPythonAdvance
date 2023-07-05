@@ -8,8 +8,7 @@ Functionality
 ### The script provides the following functionalities:
 Resource Scaling: It automatically checks if the resource enable flag is set to True. If enabled, the script dynamically creates and adds the specified resource during deployment.
 
-Getting Started
-
+### Getting Started
 To get started with the script, follow these steps:
 
 Clone this repository to your local machine.
