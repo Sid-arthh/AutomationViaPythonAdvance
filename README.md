@@ -88,7 +88,7 @@ Here, we define some initial variables. directory represents the path to the "re
         sys.exit(1)
     Client_yml_file = sys.argv[1]
 
-#### Too many Functions
+## Too many Functions 
 1.The read_file function reads and returns the content of a YAML file.
 
     def read_file(file_path):
