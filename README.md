@@ -12,9 +12,7 @@ Resource Scaling: It automatically checks if the resource enable flag is set to 
 To get started with the script, follow these steps:
 
 Clone this repository to your local machine.
-Install the necessary dependencies by running pip install -r requirements
-  REQUIREMENTS
-  python3+
+Install the necessary dependencies [ python3+ ]
   
 Configure the script by modifying the settings file config.py to match your environment.
 Run the script using the command python main.py.
