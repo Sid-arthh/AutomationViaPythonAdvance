@@ -37,11 +37,13 @@ Clone the repository to your local machine.
 Navigate to the project's main directory.
 
   Resource Configuration:
+  
         Inside the Resources directory, locate the specific resource file you want to configure (e.g., ec2.py, alb.py).
         Modify the resource file according to your requirements and desired settings.
         Ensure that the parameters.yml file contains the necessary data to customize the resource.
 
   Main Code Configuration:
+  
         Access the Template directory and open the main.py (or equivalent) file.
         Customize the code within the main.py file to meet your specific needs and desired functionality.
 
