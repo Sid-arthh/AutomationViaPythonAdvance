@@ -1,0 +1,133 @@
+import sys
+import yaml
+import os
+import importlib
+
+directory = "./resources"
+combined_data = {}
+combined_data_dict = {}
+resource_names = []
+outstream_file = "resources/outstream.yml"
+
+if len(sys.argv) < 2:
+    print("Please provide a YAML file path as a command line argument.")
+    sys.exit(1)
+template_Yamlfile = sys.argv[1]
+
+def read_file(file_path):
+    with open(file_path, 'r') as file:
+        data_content = file.read()
+        data = yaml.safe_load(data_content)
+    return data
+
+parameter_template = read_file(template_Yamlfile)
+
+
+def process_template(template_Yamlfile):
+    template_dir = os.path.abspath(template_Yamlfile)
+    print(template_dir)
+ 
+    template_value = parameter_template.get('template', '')
+    main_template_file = template_value 
+    
+    print(main_template_file)
+    os.chdir('..') 
+    sys.path.append(os.getcwd())
+    AddResource(parameter_template,main_template_file)
+
+
+def AddResource(data,main_template):
+    resource_names.append(main_template)
+    for key, value in data.items():
+        resource_enabled = data.get(f'{key}Enabled', '') 
+        print("key is",key)
+        if isinstance(value, dict) and resource_enabled == 'true': 
+            resource_names.append(key.lower())
+            print("resource is",resource_names)
+
+    for name in resource_names:
+        module_name = f"resources.{name}"
+        module_name2 = name + '.py' 
+        Call_Module_data(name,module_name,module_name2)
+
+def Call_Module_data(name, module_name,module_name2): 
+    for file in os.listdir(directory):
+        print("file is",file)
+        current_dir = os.path.dirname(file)
+        if file.lower() == module_name2.lower():
+            file_path = os.path.join(current_dir, file)
+            file_path = f"resources.{file}"
+            resource_name = os.path.splitext(file_path)[0]
+
+            try:
+                module = importlib.import_module(resource_name,package = "pythons.template")
+                print("module is ",module)
+                create_function = getattr(module, f"create_{name.casefold()}")
+                temp_data = create_function()
+                print(temp_data)
+                combined_data = temp_data
+                resource_Key_check(combined_data_dict,combined_data)
+
+            except Exception as e:
+                print(f"Error occurred while calling create_{name}() function in {module_name}: {e}")
+
+
+
+
+def resource_Key_check(combined_data_dict,combined_data):
+    if 'Resources' in combined_data_dict or 'resources' in combined_data_dict:
+        resources_key = 'Resources' if 'Resources' in combined_data_dict else 'resources'
+        combined_data_dict[resources_key].update(combined_data)
+        combine_and_store(combined_data_dict)
+    else:
+        combined_data_dict.update(combined_data)
+        if len(resource_names) < 2:
+            combine_and_store(combined_data_dict)
+
+def combine_and_store(combined_data):
+    if os.path.exists(outstream_file):
+        with open(outstream_file, 'r') as file:
+            existing_data = yaml.safe_load(file)
+
+        if existing_data == combined_data:
+            print("Output file already contains the same data. Skipping write operation.")
+            read_streamFile()
+    else:
+        with open(outstream_file, 'a') as outfile:
+            yaml.safe_dump(combined_data, outfile, sort_keys=False, default_flow_style=False)
+            outfile.write('\n\n')
+            read_streamFile()
+
+
+def replace_values(data, replacements):
+        if isinstance(data, dict):
+            print("DICCT")
+            for key, value in data.items():
+                print("key is ",key,"and value is",value)
+                if isinstance(value, str) and '.' in value:
+                        parts = value.split('.')
+                        replace_key = parts[0]
+                        replace_value = parts[1]
+                        if replace_key in replacements:
+                            value1 = replacements[replace_key]
+                            if replace_value in value1:
+                                data[key] = data[key].replace(value,str(value1[replace_value]))
+                        else:
+                            return None
+                else:
+                    replace_values(value, replacements)
+
+        elif isinstance(data, list):
+            for item in data:
+                replace_values(item, replacements)
+ 
+def read_streamFile():
+    outfile = read_file(outstream_file)
+    replace_values(outfile, parameter_template)
+    formatted_content = yaml.dump(outfile, sort_keys=False)
+    with open('out.yml', 'w') as f:
+        f.write(formatted_content)
+        os.remove(outstream_file)
+
+            
+process_template(template_Yamlfile)
