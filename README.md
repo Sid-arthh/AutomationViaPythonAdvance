@@ -55,5 +55,22 @@ After executing the script, an output file will be generated. This output file c
 
         locate the main.py in resource directory and run the command
         
-        python3 main.py parameter.yml
+        python3 main.py path/to/parameter.yml
+
+
+### Code Deep Dive
+    
+
+In this section, we will provide a detailed explanation of the updated code for better understanding. Let's break down the code into smaller parts and discuss their functionalities.
+
+#### Dependencies and imports
+
+The above lines import the necessary modules for the script, including sys, yaml, os, and importlib
+  
+  import sys
+  import yaml
+  import os
+  import importlib
+
+
 
