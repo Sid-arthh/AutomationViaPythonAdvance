@@ -51,3 +51,9 @@ Navigate to the project's main directory.
 
 After executing the script, an output file will be generated. This output file contains the necessary information for deploying the CloudFormation stack. Ensure you have the required permissions and access to perform the deployment.
 
+#### Command to Run the Script
+
+        locate the main.py in resource directory and run the command
+        
+        python3 main.py parameter.yml
+
