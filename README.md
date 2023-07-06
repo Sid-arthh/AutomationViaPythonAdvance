@@ -43,7 +43,7 @@ Resource Scaling: It automatically checks if the resource enable flag is set to 
 
 2. The Resources Key Name in Yml file should be used as Prefix for Enabled key
    
-               For ALB, enable key should be 
+               For ALB, Enable key should be 
                ALBEnabled
                For s3, Enable key should be 
                s3Enabled
