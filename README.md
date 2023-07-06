@@ -9,6 +9,45 @@ Welcome to the repository! This project features a Python wrapper script designe
 ### The script provides the following functionalities:
 Resource Scaling: It automatically checks if the resource enable flag is set to True. If enabled, the script dynamically creates and adds the specified resource during deployment.
 
+### NOTE 
+#### Client file that is ( parameter.yml ) format 
+
+    template: 'ec2'
+    description: 'Deploy ec2'
+    ec2:
+      Type: AWS::EC2::Instance
+      ImageId: ami-053b0d53c279acc90
+      InstanceType: t2.micro
+      TagValue: TestInstance
+    securityGroup:
+      Type: AWS::EC2::SecurityGroup
+      GroupDescription: Allow TCP traffic
+      Port: 0
+    
+    ALB:
+      Type: 'AWS::ElasticLoadBalancingV2::ListenerRule'
+      TargetGroupType: 'forward'
+    
+    s3:
+      Type: 'AWS::S3::Bucket'
+      deletionPolicy: Retain
+      bucketName: my-test-bucket 
+    
+    
+    ALBEnabled: 'true'
+    s3Enabled: 'true'
+
+1. The yml file must contain the a key "template" with the name of base resource that you want to deploy.
+
+        template : 'Name of the resource'
+
+2. The Resources Key Name in Yml file should be used as Prefix for Enabled key
+   
+               For ALB, enable key should be 
+               ALBEnabled
+               For s3, Enable key should be 
+               s3Enabled
+   
 ### Getting Started
 To get started with the script, follow these steps:
 
